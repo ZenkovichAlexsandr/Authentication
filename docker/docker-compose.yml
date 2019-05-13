@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+  wiremock:
+    build:
+      context: ./../
+      dockerfile: docker/Dockerfile.wiremock
+    ports:
+      - 8444:8444
+    volumes:
+      - ./../wiremock:/wiremock
+
+  implementation:
+    build:
+      context: ./../
+      dockerfile: docker/Dockerfile
+    env_file: .env
+    links:
+      - wiremock
+    depends_on:
+      - wiremock
+    ports:
+      - 8443:8443
+
+

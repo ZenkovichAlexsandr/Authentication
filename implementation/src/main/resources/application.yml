@@ -1,0 +1,21 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:server-keystore.jks
+    key-password: ${KEY_PASSWORD:changeit}
+    key-store-password: ${KEY_STORE_PASSWORD:changeit}
+    key-store-type: JCEKS
+    trust-store: classpath:server-truststore.jks
+    trust-store-password: ${TRUST_STORE_PASSWORD:changeit}
+    trust-store-type: JCEKS
+    client-auth: need
+
+authentication:
+  token:
+    secret: ${TOKEN_SECRET:ChangeMeToSomethingElse}
+    expiration: ${TOKEN_EXPIRATION:3600}
+  maxAttemptCount: ${MAX_ATTEMP_COUNT:3}
+
+account-api:
+  url: ${ACCOUNT_API_URL:https://localhost:8444/accounts/}

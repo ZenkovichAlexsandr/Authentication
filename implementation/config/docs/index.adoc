@@ -1,0 +1,28 @@
+:numbered:
+:icons: font
+:imagesdir: images
+:encoding: utf-8
+:pdf-stylesdir: theme
+:pdf-style: clm
+:pdf-fontsdir: theme/fonts
+
+:toc: left
+
+:Author: Alexander Zenkovich
+:Email: zenkovich.alexsandr@gmail.com
+:Date: 08/05/2019
+
+= Assignment Development Documentation
+{Author} <{Email}>
+Version <{Date}>
+
+== Introduction
+.Resources
+|===
+| Resource | Location | How to get access
+
+| GitHub | https://github.com/ZenkovichAlexsandr/authentication | Request from `zenkovich.alexsandr@gmail.com`
+
+|===
+
+include::content/dev-setup.adoc[]

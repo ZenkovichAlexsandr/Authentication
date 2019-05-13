@@ -1,0 +1,7 @@
+FROM java:8-jre
+MAINTAINER Alexander Zenkovich <zenkovich.alexsandr@gmail.com>
+
+ADD start-wiremock.sh start-wiremock.sh
+
+CMD ["./start-wiremock.sh"]
+EXPOSE 8444

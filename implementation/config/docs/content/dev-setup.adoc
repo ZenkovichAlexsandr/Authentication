@@ -1,0 +1,70 @@
+<<<
+== Development Environment Setup
+
+=== Pre-requisites
+
+Following tools and packages should be installed in first place:
+
+.Tools and packages
+|===
+| Tool | How to install | Version
+
+| JDK              | http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | >= 1.8.0_121
+| Maven            | https://maven.apache.org/                                                           | >= 3.6.0
+| Docker           | https://www.docker.com/                                                             | >= 18
+| Docker Compose   | https://www.docker.com/                                                             | >= 3.2
+|===
+
+==== Database
+In current project we use in memory H2 database.
+
+==== Environment variables
+Project can be configured via env variables.
+
+.Env variables
+|===
+| Variable | Description | Default
+
+| KEY_PASSWORD              | Password for key jks.                             | >= changeit
+| KEY_STORE_PASSWORD        | Password for key store jks.                       | >= changeit
+| TRUST_STORE_PASSWORD      | Password for trust store jks.                     | >= changeit
+| TOKEN_SECRET              | Token secret.                                     | >= ChangeMeToSomethingElse
+| TOKEN_EXPIRATION          | Token Expiration time.                            | >= 3600
+| MAX_ATTEMP_COUNT          | Maximum number of incorrect password attempts.
+                              After that user will be blocked for 24 hours.     | >= 3
+| ACCOUNT_API_URL           | API URL for check account number.                 | >= ttps://localhost:8444/accounts/
+|===
+
+==== Start application
+Currently following services and modules exist
+
+.Services/Modules and ports mapping
+|===
+| Service | Description | Access and Port
+
+| wiremock | Service that provides Accounts API. | 8444
+| implementation | Service that provide API for creating an online banking account and one endpoint for authentication. | 8443
+
+|===
+
+To start application you can use:
+`./start.sh`
+
+=== Certificates
+For sending requests to the server you can use `ca.pem` and `ca.key` in `conf` folder.
+
+=== Curl
+After you run server, you can use curl for sending requests.
+
+For creating account:
+```
+curl https://localhost:8443/account -d '{"username": "user", "password": "userpassword", "accountNumber": "77853449"}' --cert ./conf/ca.pem:changeit --key ./conf/ca.key -H "Content-Type: application/json"
+```
+For authentication:
+```
+curl https://localhost:8443/auth/login -d '{"username": "user", "password": "userpassword"}' --cert ./conf/ca.pem:changeit --key ./conf/ca.key -H "Content-Type: application/json"
+```
+
+=== Swagger
+Project contains https://swagger.io[Swagger] For API Documentation.
+After start application you can go to `https://localhost:8443/swagger-ui.html` to try some API.

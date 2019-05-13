@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <property name="id.type" value="VARCHAR(255)"/>
+    <property name="int.type" value="INT"/>
+    <property name="string.type" value="VARCHAR(255)"/>
+    <property name="enum.type" value="VARCHAR(100)"/>
+    <property name="timestamp.type" value="TIMESTAMP"/>
+
+    <changeSet id="ADD_USER_TABLE" author="zenkovich.alexsandr@gmail.com">
+        <createTable tableName="USER">
+            <column name="ID" type="${id.type}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="${string.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="${string.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE" type="${enum.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FAILURE_LOGIN_COUNT" type="${int.type}" defaultValue="0"/>
+            <column name="BLOCKED_TIME" type="${timestamp.type}"/>
+        </createTable>
+
+        <addUniqueConstraint tableName="USER" columnNames="USERNAME" constraintName="USER_USERNAME_UNIQUE"/>
+    </changeSet>
+
+    <changeSet id="ADD_ACCOUNT_TABLE" author="zenkovich.alexsandr@gmail.com">
+        <createTable tableName="ACCOUNT">
+            <column name="IBAN" type="${id.type}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ACCOUNT_NUMBER" type="${string.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="${id.type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="ACCOUNT"
+                                 baseColumnNames="USER_ID"
+                                 constraintName="ACCOUNT_USER_ID_USER"
+                                 referencedTableName="USER"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+</databaseChangeLog>

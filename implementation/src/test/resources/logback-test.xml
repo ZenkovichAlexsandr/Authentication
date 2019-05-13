@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.beans.factory" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.context" level="WARN"/>
+    <logger name="org.springframework.orm" level="WARN"/>
+
+    <!-- Hibernate related categories. -->
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.hibernate.loader.Loader" level="ERROR"/>
+    <!-- Switch to DEBUG in case you want SQL-queries to be logged. -->
+    <!-- Note: only query text without parameter values will be logged. -->
+    <logger name="org.hibernate.SQL" level="OFF"/>
+    <!-- Switch to TRACE in case you want query parameters to be logged. -->
+    <logger name="org.hibernate.type" level="OFF"/>
+    <!-- Switch to TRACE in case you want DDL executed by Hibernate based on entities metadata will be logged. -->
+    <!-- As FlyWay is used in the application this category can be used for test purposes only. -->
+    <logger name="org.hibernate.tool.hbm2ddl" level="OFF"/>
+    <logger name="org.hibernate.search.impl.SimpleIndexingProgressMonitor" level="WARN"/>
+</configuration>
